@@ -1,18 +1,21 @@
-import React, { Component } from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import React, { Component } from "react";
+import { Form, Label, Input } from "reactstrap";
+
 
 class FilterPosts extends Component {
-  render () {
+  render() {
     return (
-      <Form inline>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="filter-field" className="mr-sm-2">Filter by title:</Label>
-          <Input type="text" name="email" id="filter-field" />
-          <Button/>
-        </FormGroup>
-      </Form>
-    )
+        <Form inline style={{display: 'flex', justifyContent: 'center'}}>
+          <Label for="filter-field" />
+          <Input
+            style={{width: '40em'}}
+            type="text"
+            id="filter-field"
+            placeholder="Search by Title"
+          />
+        </Form>
+    );
   }
 }
 
-export default FilterPosts
+export default FilterPosts;

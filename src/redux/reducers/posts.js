@@ -1,4 +1,3 @@
-
 import { LOADING_POSTS, POSTS_FETCH_ERROR, RECEIVED_POSTS } from '../actions'
 
 const initialState = {

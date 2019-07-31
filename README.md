@@ -1,68 +1,87 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Checkpoint
 
-## Available Scripts
+Convert Reddit...ish to React with Redux!
 
-In the project directory, you can run:
+## Getting started
 
-### `npm start`
+* Clone [this repo](https://github.com/gSchool/redux-unit-checkpoint) to your local machine
+* Install the dependencies with either `yarn` or `npm install`
+* This is styled with `Bootstrap v3.3.7`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Just like the previous checkpoints, you will be hitting the [provided API for this course](https://github.com/gSchool/collective-api) and be hitting the following endpoints:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+* `http://localhost:8082/api/posts` (for the posts)
+* `http://localhost:8082/api/comments` (for the comments)
 
-### `npm test`
+You could roughly follow these steps (not necessarily in this order):
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Use yarn to add `redux react-redux redux-thunk`
+* Create a reducer for each "resource", such as posts and comments, in this case
+* Configure a store with `redux-thunk` and the reducers
+* Create an actions / action-creators file for each "resource"
+* Figure out which components should be connected components and implement `mapStateToProps` / `mapDispatchToProps` where necessary
 
-### `npm run build`
+## User Stories
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Users can create a post**
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+* Users can toggle the "New Post" form
+* Users can create posts
+  * Each post has a title, body, author, and image url
+* Users cannot create a new post if any of the inputs are blank
+  * Fields should only appear invalid once they've tabbed off
+* Users cannot click "Create Post" until the form is valid
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Users can view posts**
 
-### `npm run eject`
+* Users see the number of comments correctly pluralized
+  * i.e. "0 comments" or "1 comment"
+* Users see posts dynamically reorder according to number of votes
+* Users see the post's date/time displayed nicely
+  * i.e. "Yesterday at 3:09pm", "4 minute ago", etc.
+  * You will need an [external library](https://www.npmjs.com/package/react-moment)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Votes**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Users can upvote
+* Users can downvote
+  * But not make it go lower than 0
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Filter**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Users can filter based on the post title
 
-## Learn More
+**Comments**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Users can toggle comments
+* Users can add comments
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Detailed Wireframes
 
-### Code Splitting
+**Posts**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Form toggle
 
-### Analyzing the Bundle Size
+![](/images/form-toggle.gif)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Validations
 
-### Making a Progressive Web App
+![](/images/validation.gif)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Creating and viewing a post
 
-### Advanced Configuration
+![](/images/add-new-post.gif)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+**Votes**
 
-### Deployment
+Voting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![](/images/voting.gif)
 
-### `npm run build` fails to minify
+**Filter**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![](/images/filter.gif)
+
+**Comments**
+
+![](/images/commenting.gif)

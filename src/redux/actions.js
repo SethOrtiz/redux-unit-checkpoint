@@ -1,3 +1,5 @@
+////////////// Post Fetch //////////////////////
+
 export const LOADING_POSTS = "LOADING_POSTS";
 export function loadingPosts() {
   return {
@@ -20,6 +22,8 @@ export function fetchPosts(posts) {
   };
 }
 
+//////////// Comments Fetch /////////////
+
 export const LOADING_POST_COMMENTS = "LOADING_POST_COMMENTS";
 export function loadingPostComments() {
   return {
@@ -35,9 +39,33 @@ export function postCommentsFetchError() {
 }
 
 export const RECEIVED_POST_COMMENTS = "RECEIVED_POST_COMMENTS";
-export function fetchPostComments(postId, comments) {
+export function fetchPostComments(comments) {
     return {
     type: RECEIVED_POST_COMMENTS,
     payload: comments
+  };
+}
+
+///////////////  Comments Post  //////////////////////
+
+export const POSTING_COMMENT = "POSTING_COMMENT";
+export function postingComment(postId) {
+    return {
+    type: POSTING_COMMENT
+  };
+}
+
+export const COMMENT_FAILED_TO_POST = "COMMENT_FAILED_TO_POST";
+export function commentFailedToPost() {
+  return {
+    type: COMMENT_FAILED_TO_POST
+  };
+}
+
+export const COMMENT_POST_SUCCESS = "COMMENT_POST_SUCCES";
+export function commentPostSuccess(newCommentJson) {
+    return {
+    type: COMMENT_POST_SUCCESS,
+    payload: newCommentJson
   };
 }

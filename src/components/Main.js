@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import AddPostForm from "./AddPostForm";
-import FilterPosts from "./FilterPosts";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import CommentContainer from "../redux/containers/CommentContainer";
 
 class Main extends Component {
+
+
   componentDidMount = () => {
     this.props.getPosts();
   };
@@ -13,14 +14,6 @@ class Main extends Component {
     const { error, loading, posts } = this.props;
     return (
       <Container className="mt-4">
-        <Row>
-          <Col sm={{ size: 8, offset: 1 }}>
-            <FilterPosts />
-          </Col>
-          <Col sm="2">
-            <Button color="secondary">Add Post</Button>
-          </Col>
-        </Row>
         <Row className="mt-4">
           <Col sm={{ size: 11, offset: 1 }}>
             <AddPostForm />
@@ -29,7 +22,6 @@ class Main extends Component {
         <Row>
           <Col className="pr-0" sm={{ size: 9, offset: 1 }}>
             <div>
-              <h1>Posts</h1>
               {error && (
                 <div>
                   <img
@@ -51,7 +43,7 @@ class Main extends Component {
               {posts.length > 0 && (
                 <div>
                   {posts.map(post => {
-                    return <CommentContainer key={post.id} {...post} />;
+                    return <CommentContainer key={post.id} {...post} postId={post.id} />;
                   })}
                 </div>
               )}
