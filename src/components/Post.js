@@ -6,12 +6,10 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Row,
   Col,
   Button,
   Form,
-  FormGroup,
   Input,
   Collapse
 } from "reactstrap";
@@ -19,17 +17,6 @@ import {
 import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
-
-const votesStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  backgroundColor: "#eeeeee",
-  paddingTop: "1em",
-  margin: "none",
-  width: "7%",
-  borderRadius: "3px"
-};
 
 class Post extends Component {
   state = {
@@ -51,11 +38,11 @@ class Post extends Component {
     });
   };
   ///////////////  post a comment    ////////////////
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
-        newCommentValue: e.target.value
-      }
-    )};
+      newCommentValue: e.target.value
+    });
+  };
 
   handleSubmit = e => {
     this.props.addComment(this.state.newCommentValue, this.props.postId);
@@ -63,59 +50,64 @@ class Post extends Component {
   };
 
   render() {
-    const { error, loading, postFailure, posting, comments, postId } = this.props;
+    const {
+      error,
+      loading,
+      postFailure,
+      posting,
+      comments,
+      postId
+    } = this.props;
 
     const postComments = comments.filter(comment => comment.post_id === postId);
     return (
       <Row className="mt-3">
         <Col style={{ display: "flex" }}>
-          <div style={votesStyle}>
-            <div>
-              <FaArrowUp />
-            </div>
-            <strong> {this.props.votes >= 0 ? this.props.votes : 0}</strong>
-            <div>
-              <FaArrowDown />
-            </div>
-          </div>
-          <span style={{ width: "93%" }}>
-            <Card>
-              Posted by {this.props.author}{" "}
-              <Moment fromNow>{this.props.createdAt}</Moment>
+            <Card className="card-lux">
+           <CardBody>
+              Posted by {this.props.author}
+              <br/>
+              <Moment style={{color :'#343a40', fontSize: '0.8em'}}fromNow>{this.props.createdAt}</Moment>
+               </CardBody>
               <CardImg
                 top
                 width="100%"
                 src={this.props.img_url}
                 alt="Card image"
               />
-              <CardBody>
-                <CardTitle>{this.props.title}</CardTitle>
-                <CardSubtitle />
-                <CardText>{this.props.content}</CardText>
+              <CardBody style={{ backgroundColor: "#f9f9f9"}}>
+                <CardTitle style={{ fontWeight: '500', fontSize: '1.2em'}} >{this.props.title}</CardTitle>
+                <CardText style={{ fontWeight: '300', fontSize: '0.9em'}} >{this.props.content}</CardText>
                 <hr />
-                <button
-                  style={{ backgroundColor: "white", border: "none" }}
-                  onClick={this.toggle}
-                >
+                <Button onClick={this.toggle} className="lux" style={{ width: "50%" }} color="light">
                   <FaComment /> {postComments.length} Comments
-                </button>
+                </Button> 
+                <span style={{ marginLeft: "10%"}}>
+                <span style={{ marginRight: "2%"}}> Votes : {this.props.votes >= 0 ? this.props.votes : 0}</span>
+                <Button className="lux" style={{ width: "10%" }} color="light">
+                <FaArrowUp/>
+                </Button>
+                <Button className="lux" style={{ width: "10%" }} color="light">
+                <FaArrowDown />
+                </Button>
+                </span>
                 <Collapse isOpen={this.state.collapse} id="commentContainer">
                   <Form
                     inline
                     style={{ marginTop: "1em" }}
                     onSubmit={this.handleSubmit}
                   >
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                      <Input
-                        type="text"
-                        name="comment"
-                        id="comment-field"
-                        placeholder="Enter a comment here"
-                        value={this.state.newCommentValue}
-                        onChange={this.handleChange}
-                      />
-                    </FormGroup>
-                    <Button color="primary" type="submit">
+                    <Input
+                      type="text"
+                      name="comment"
+                      id="comment-field"
+                      placeholder="Enter a comment here"
+                      value={this.state.newCommentValue}
+                      onChange={this.handleChange}
+                      required
+                      className="lux-control"
+                    />
+                    <Button type="submit" className="lux" color="light">
                       Submit
                     </Button>
                     {postFailure && (
@@ -169,7 +161,6 @@ class Post extends Component {
                 </Collapse>
               </CardBody>
             </Card>
-          </span>
         </Col>
       </Row>
     );

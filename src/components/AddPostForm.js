@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import {
-  Row,
-  Col,
   Form,
   FormGroup,
   Label,
   Input,
   Button,
-  Collapse
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 
-const formStyle = {
-  backgroundColor: "white",
-  padding: "1em",
-  boxShadow: "0.1em 0.2em 0.5em #888888",
-  marginBottom: "1em"
-};
 
 class AddPostForm extends Component {
   state = {
-    collapse: false,
+    modal: false,
     author: "",
     content: "",
     title: "",
@@ -39,12 +34,13 @@ class AddPostForm extends Component {
   toggle = () => {
     this.setState(prevState => {
       return {
-        collapse: !prevState.collapse
+        modal: !prevState.modal
       };
     });
   };
 
   handleSubmit = e => {
+    this.toggle()
     const author = this.state.author;
     const content = this.state.content;
     const title = this.state.title;
@@ -58,8 +54,7 @@ class AddPostForm extends Component {
     const { postFailure, posting } = this.props;
     return (
       <>
-        <Row style={{ display: "flex", justifyContent: "center" }}>
-          <Button color="light" style={{ width: "40%" }} onClick={this.toggle}>
+          <Button className="lux" color="dark" style={{ width: "100%"}} onClick={this.toggle}>
             Create A Post
           </Button>
           {postFailure && (
@@ -80,12 +75,12 @@ class AddPostForm extends Component {
               />
             </div>
           )}
-        </Row>
         <br />
-        <Collapse isOpen={this.state.collapse}>
-          <Row>
-            <Col sm="10">
-              <Form style={formStyle} onSubmit={this.handleSubmit}>
+        <Modal isOpen={this.state.modal}>
+        <ModalHeader toggle={this.toggle}>New Post</ModalHeader>
+
+              <Form  onSubmit={this.handleSubmit}>
+                   <ModalBody>
                 <FormGroup>
                   <Label for="title-field">Title</Label>
                   <Input
@@ -129,13 +124,23 @@ class AddPostForm extends Component {
                     id="image-field"
                   />
                 </FormGroup>
-                <Button type="submit" color="primary">
+                     </ModalBody>
+                            <ModalFooter>
+              <div>
+                <button type="submit" className="btn btn-light lux">
                   Submit
-                </Button>
+                </button>
+              </div>
+              <div
+                className="btn btn-light lux"
+                to="/profile"
+                onClick={this.toggle}
+              >
+                Cancel
+              </div>
+            </ModalFooter>
               </Form>
-            </Col>
-          </Row>
-        </Collapse>
+        </Modal>
       </>
     );
   }

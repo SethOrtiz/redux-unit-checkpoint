@@ -1,21 +1,15 @@
 import React from "react";
-import { Navbar, NavbarBrand, Nav } from "reactstrap";
-import FilterPosts from "./FilterPosts";
+import { Navbar, NavbarBrand } from "reactstrap";
 
-const navStyle = {
-  
-};
+
 
 export default class Example extends React.Component {
   render() {
     return (
-      <Navbar style={navStyle} light>
-        <NavbarBrand href="/">
+      <Navbar className="navbar-lux" light>
+        <NavbarBrand className="navbar-brand" href="/">
           Reddit Clone
         </NavbarBrand>
-        <Nav>
-          <FilterPosts />
-        </Nav>
       </Navbar>
     );
   }
