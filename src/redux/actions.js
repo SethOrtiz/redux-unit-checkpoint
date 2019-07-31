@@ -46,7 +46,32 @@ export function fetchPostComments(comments) {
   };
 }
 
-///////////////  Comments Post  //////////////////////
+///////////////     Add Post  //////////////////////
+
+export const POSTING_POST = "POSTING_POST";
+export function postingPost() {
+    return {
+    type: POSTING_POST
+  };
+}
+
+export const POST_FAILED_TO_POST = "POST_FAILED_TO_POST";
+export function postFailedToPost() {
+  return {
+    type: POST_FAILED_TO_POST
+  };
+}
+
+export const POST_POST_SUCCESS = "POST_POST_SUCCES";
+export function postPostSuccess(newPostJson) {
+    return {
+    type: POST_POST_SUCCESS,
+    payload: newPostJson
+  };
+}
+
+
+///////////////    Add Comment  //////////////////////
 
 export const POSTING_COMMENT = "POSTING_COMMENT";
 export function postingComment(postId) {

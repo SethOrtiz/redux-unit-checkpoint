@@ -5,6 +5,9 @@ import {
   loadingPostComments,
   postCommentsFetchError,
   fetchPostComments,
+  postingPost,
+  postFailedToPost,
+  postPostSuccess,
   postingComment,
   commentFailedToPost,
   commentPostSuccess
@@ -42,6 +45,35 @@ export function getPostComments() {
   };
 }
 
+export function addPost(author, content, title, img_url) {
+  return async function(dispatch) {
+    dispatch(postingPost());
+    try {
+      const res = await fetch(`http://localhost:8082/api/posts`, {
+        method: "POST",
+        body: JSON.stringify({
+          author,
+          content,
+          title,
+          img_url
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (!res.ok) {
+        throw new Error();
+      } else {
+        const newPostJson = await res.json();
+        dispatch(postPostSuccess(newPostJson));
+      }
+    } catch (e) {
+      dispatch(postFailedToPost());
+      console.log(e);
+    }
+  };
+}
+
 export function addComment(content, post_id) {
   return async function(dispatch) {
     dispatch(postingComment());
@@ -64,7 +96,7 @@ export function addComment(content, post_id) {
       }
     } catch (e) {
       dispatch(commentFailedToPost());
-      console.log(e)
+      console.log(e);
     }
   };
 }

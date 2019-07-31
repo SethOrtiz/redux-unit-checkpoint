@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AddPostForm from "./AddPostForm";
+import FormContainer from "../redux/containers/FormContainer";
 import { Container, Row, Col } from "reactstrap";
 import CommentContainer from "../redux/containers/CommentContainer";
 
@@ -16,7 +16,7 @@ class Main extends Component {
       <Container className="mt-4">
         <Row className="mt-4">
           <Col sm={{ size: 11, offset: 1 }}>
-            <AddPostForm />
+            <FormContainer />
           </Col>
         </Row>
         <Row>

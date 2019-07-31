@@ -57,7 +57,7 @@ class Post extends Component {
       }
     )};
 
-  onSubmit = e => {
+  handleSubmit = e => {
     this.props.addComment(this.state.newCommentValue, this.props.postId);
     e.preventDefault();
   };
@@ -103,7 +103,7 @@ class Post extends Component {
                   <Form
                     inline
                     style={{ marginTop: "1em" }}
-                    onSubmit={this.onSubmit}
+                    onSubmit={this.handleSubmit}
                   >
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                       <Input
