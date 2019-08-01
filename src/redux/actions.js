@@ -46,7 +46,57 @@ export function fetchPostComments(comments) {
   };
 }
 
-///////////////     Add Post  //////////////////////
+///////////////     Increase Vote    //////////////////////
+
+export const LOADING_UP_VOTE = "LOADING_UP_VOTE";
+export function loadingUpVote() {
+  return {
+    type: LOADING_UP_VOTE
+  };
+}
+
+export const INCREASE_VOTE_ERROR = "INCREASE_VOTE_ERROR";
+export function increaseVoteError() {
+  return {
+    type: INCREASE_VOTE_ERROR
+  };
+}
+
+export const INCREASE_VOTE = "INCREASE_VOTE";
+export function increaseVote(updatedPost, postId) {
+    return {
+    type: INCREASE_VOTE,
+    updatedPost,
+    postId
+  };
+}
+
+///////////////     Decrease Vote    //////////////////////
+
+export const LOADING_DOWN_VOTE = "LOADING_DOWN_VOTE";
+export function loadingDownVote() {
+  return {
+    type: LOADING_DOWN_VOTE
+  };
+}
+
+export const DECREASE_VOTE_ERROR = "DECREASE_VOTE_ERROR";
+export function decreaseVoteError() {
+  return {
+    type: DECREASE_VOTE_ERROR
+  };
+}
+
+export const DECREASE_VOTE = "DECREASE_VOTE";
+export function decreaseVote(updatedPost, postId) {
+    return {
+    type: DECREASE_VOTE,
+    updatedPost,
+    postId
+  };
+}
+
+///////////////       Add Post      //////////////////////
 
 export const POSTING_POST = "POSTING_POST";
 export function postingPost() {

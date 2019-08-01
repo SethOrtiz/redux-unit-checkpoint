@@ -10,7 +10,13 @@ import {
   postPostSuccess,
   postingComment,
   commentFailedToPost,
-  commentPostSuccess
+  commentPostSuccess,
+  loadingUpVote,
+  increaseVote,
+  increaseVoteError,
+  loadingDownVote,
+  decreaseVote,
+  decreaseVoteError
 } from "./actions";
 
 export function getPosts() {
@@ -45,6 +51,37 @@ export function getPostComments() {
   };
 }
 
+export function getUpVote(postId) {
+  return async function(dispatch) {
+    dispatch(loadingUpVote());
+    try {
+      const res = await fetch(`http://localhost:8082/api/posts/votes/increase/${postId}`);
+      if (!res.ok) {
+        throw new Error();
+      }
+      const updatedPost = await res.json();
+      dispatch(increaseVote(updatedPost, postId));
+    } catch (e) {
+      dispatch(increaseVoteError());
+    }
+  };
+}
+
+export function getDownVote(postId) {
+  return async function(dispatch) {
+    dispatch(loadingDownVote());
+    try {
+      const res = await fetch(`http://localhost:8082/api/posts/votes/decrease/${postId}`);
+      if (!res.ok) {
+        throw new Error();
+      }
+      const updatedPost = await res.json();
+      dispatch(decreaseVote(updatedPost, postId));
+    } catch (e) {
+      dispatch(decreaseVoteError());
+    }
+  };
+}
 export function addPost(author, content, title, img_url) {
   return async function(dispatch) {
     dispatch(postingPost());
