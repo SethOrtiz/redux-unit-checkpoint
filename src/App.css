@@ -64,14 +64,14 @@
       -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out,
       -webkit-box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    transition: border-color 0.3s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.15s ease-in-out,
       -webkit-box-shadow 0.15s ease-in-out;
   }
   
   .lux-control:focus {
     color: #55595c;
-    background-color: #f7f7f9;
+    background-color: #ffd37a;
     border-color: #5a5a5a;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.1rem rgba(5, 5, 5, 0.4);

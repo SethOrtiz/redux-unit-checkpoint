@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import FormContainer from "../redux/containers/FormContainer";
 import { Container, Row, Col } from "reactstrap";
 import CommentContainer from "../redux/containers/CommentContainer";
-import FilterPosts from "./FilterPosts";
+import FilterContainer from "../redux/containers/FilterContainer";
 class Main extends Component {
   componentDidMount = () => {
     this.props.getPosts();
   };
 
   render() {
-    const { error, loading, posts } = this.props;
+    const { error, loading, posts, search } = this.props;
+    const searchedPosts = posts.filter( post =>
+        post.title.toLowerCase().includes(search.toLowerCase()) === true);
+
     return (
       <Container>
         <Row>
@@ -36,12 +39,13 @@ class Main extends Component {
                 )}
                 {posts.length > 0 && (
                   <div>
-                    {posts.map(post => {
+                    {searchedPosts.map(post => {
                       return (
                         <CommentContainer
                           key={post.id}
                           {...post}
                           postId={post.id}
+                          vostes={post.votes}
                         />
                       );
                     })}
@@ -52,7 +56,7 @@ class Main extends Component {
           </Col>
           <Col lg="4">
             <Container className="mt-3 card-lux ">
-              <FilterPosts />
+              <FilterContainer />
               <FormContainer />
             </Container>
           </Col>

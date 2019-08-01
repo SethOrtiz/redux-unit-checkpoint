@@ -54,7 +54,9 @@ class Post extends Component {
   };
 
   handleDownVote = () => {
+    if (this.props.votes > 0) {
     this.props.getDownVote(this.props.postId);
+    }
   };
 
   render() {
@@ -104,13 +106,14 @@ class Post extends Component {
               <span style={{ marginLeft: "10%" }}>
                 <span style={{ marginRight: "2%" }}>
                   {" "}
-                  Votes : {this.props.votes >= 0 ? this.props.votes : 0}
+                  Votes {this.props.votes >= 0 ? this.props.votes : 0}
                 </span>
                 <Button
                   onClick={this.handleUpVote}
                   className="lux"
-                  style={{ width: "10%" }}
-                  color="light"
+                  style={{ width: "10%"}}
+                  color="dark"
+                  outline
                 >
                   <FaArrowUp />
                 </Button>
@@ -118,7 +121,8 @@ class Post extends Component {
                   onClick={this.handleDownVote}
                   className="lux"
                   style={{ width: "10%" }}
-                  color="light"
+                  color="dark"
+                  outline
                 >
                   <FaArrowDown />
                 </Button>
@@ -140,7 +144,7 @@ class Post extends Component {
                       />
                     </span>
                     <span style={{ width: "20%" }}>
-                      <Button type="submit" className="lux" color="light">
+                      <Button type="submit" className="lux" color="dark" outline>
                         Submit
                       </Button>
                     </span>

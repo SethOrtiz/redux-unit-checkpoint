@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React  from "react";
 import { Form, Label, Input } from "reactstrap";
 
-class FilterPosts extends Component {
-  render() {
+function PostFilter({ searchPosts, search }) {
+  function changeHandler(e) {
+    searchPosts(e.target.value);
+  }
     return (
       <Form>
         <Label for="filter-field" />
@@ -11,10 +13,11 @@ class FilterPosts extends Component {
           type="text"
           id="filter-field"
           placeholder="Search by Title"
+          value={search} 
+          onChange={changeHandler}
         />
       </Form>
     );
   }
-}
 
-export default FilterPosts;
+export default PostFilter;

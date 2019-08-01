@@ -1,11 +1,9 @@
 import { connect } from "react-redux";
-import { getPosts } from "../thunks";
-import Main from "../../components/Main";
+import { searchPosts } from "../actions";
+import PostFilter from "../../components/PostFilter";
 
 const mapStateToProps = function({ posts }) {
   return {
-    error: posts.error,
-    loading: posts.loading,
     search: posts.search,
     ...posts
   };
@@ -13,8 +11,8 @@ const mapStateToProps = function({ posts }) {
 
 const mapDispatchToProps = function(dispatch) {
   return {
-    getPosts: function() {
-      dispatch(getPosts());
+    searchPosts: function(searchValue) {
+      dispatch(searchPosts(searchValue));
     },
   };
 };
@@ -22,4 +20,4 @@ const mapDispatchToProps = function(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main);
+)(PostFilter);

@@ -10,7 +10,8 @@ import {
   INCREASE_VOTE_ERROR,
   LOADING_DOWN_VOTE,
   DECREASE_VOTE,
-  DECREASE_VOTE_ERROR
+  DECREASE_VOTE_ERROR,
+  SEARCH_VALUE
 } from "../actions";
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
   posting: false,
   postFailure: false,
   voteUpdating: false,
-  voteError: false
+  voteError: false,
+  search: ""
 };
 
 function reducer(state = initialState, action) {
@@ -110,6 +112,11 @@ function reducer(state = initialState, action) {
           }
           return post;
         })
+      };
+    case SEARCH_VALUE:
+      return {
+        ...state,
+        search : action.searchValue
       };
     default:
       return state;

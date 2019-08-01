@@ -120,7 +120,6 @@ export function postPostSuccess(newPostJson) {
   };
 }
 
-
 ///////////////    Add Comment  //////////////////////
 
 export const POSTING_COMMENT = "POSTING_COMMENT";
@@ -142,5 +141,15 @@ export function commentPostSuccess(newCommentJson) {
     return {
     type: COMMENT_POST_SUCCESS,
     payload: newCommentJson
+  };
+}
+
+//////////////////    Filter by Title  //////////////////////
+
+export const SEARCH_VALUE = "SEARCH_VALUE";
+export function searchPosts(searchValue) {
+    return {
+    type: SEARCH_VALUE,
+    searchValue
   };
 }
