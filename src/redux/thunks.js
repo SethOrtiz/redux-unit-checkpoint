@@ -16,8 +16,10 @@ import {
   increaseVoteError,
   loadingDownVote,
   decreaseVote,
-  decreaseVoteError
+  decreaseVoteError,
+  sortByVotes
 } from "./actions";
+  import { toast } from 'react-toastify';
 
 export function getPosts() {
   return async function(dispatch) {
@@ -27,7 +29,8 @@ export function getPosts() {
       if (!res.ok) {
         throw new Error();
       }
-      const postsJson = await res.json();
+      const unsortedJson = await res.json();
+      const postsJson = unsortedJson.sort((a, b) => b.votes - a.votes)
       dispatch(fetchPosts(postsJson));
     } catch (e) {
       dispatch(postsFetchError());
@@ -55,28 +58,33 @@ export function getUpVote(postId) {
   return async function(dispatch) {
     dispatch(loadingUpVote());
     try {
-      const res = await fetch(`http://localhost:8082/api/posts/votes/increase/${postId}`);
+      const res = await fetch(
+        `http://localhost:8082/api/posts/votes/increase/${postId}`
+      );
       if (!res.ok) {
         throw new Error();
       }
       const updatedPost = await res.json();
-      dispatch(increaseVote(updatedPost, postId));
+      dispatch(increaseVote(updatedPost, postId)).then(dispatch(sortByVotes()));
     } catch (e) {
       dispatch(increaseVoteError());
     }
   };
 }
 
+
 export function getDownVote(postId) {
   return async function(dispatch) {
     dispatch(loadingDownVote());
     try {
-      const res = await fetch(`http://localhost:8082/api/posts/votes/decrease/${postId}`);
+      const res = await fetch(
+        `http://localhost:8082/api/posts/votes/decrease/${postId}`
+      );
       if (!res.ok) {
         throw new Error();
       }
       const updatedPost = await res.json();
-      dispatch(decreaseVote(updatedPost, postId));
+      dispatch(decreaseVote(updatedPost, postId)).then(dispatch(sortByVotes()));;
     } catch (e) {
       dispatch(decreaseVoteError());
     }
@@ -101,6 +109,7 @@ export function addPost(author, content, title, img_url) {
       if (!res.ok) {
         throw new Error();
       } else {
+        toast("Posted!")
         const newPostJson = await res.json();
         dispatch(postPostSuccess(newPostJson));
       }
@@ -137,4 +146,3 @@ export function addComment(content, post_id) {
     }
   };
 }
-

@@ -8,7 +8,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  ModalFooter
 } from "reactstrap";
 
 
@@ -21,7 +21,7 @@ class AddPostForm extends Component {
     img_url: ""
   };
 
-  handleChange = (event) => {
+  handleChange = event => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -29,7 +29,7 @@ class AddPostForm extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
   toggle = () => {
     this.setState(prevState => {
@@ -40,106 +40,115 @@ class AddPostForm extends Component {
   };
 
   handleSubmit = e => {
-    this.toggle()
+    this.toggle();
     const author = this.state.author;
     const content = this.state.content;
     const title = this.state.title;
     const img_url = this.state.img_url;
     this.props.addPost(author, content, title, img_url);
     e.preventDefault();
-    console.log(author);
   };
 
   render() {
     const { postFailure, posting } = this.props;
     return (
       <>
-          <Button className="lux" color="dark" style={{ width: "100%"}} onClick={this.toggle}>
-            Create A Post
-          </Button>
-          {postFailure && (
-            <div>
-              <img
-                src="https://thumbs.gfycat.com/BewitchedShamefulDobermanpinscher-max-1mb.gif"
-                alt="error animated gif"
-                style={{ width: "50px" }}
-              />
-            </div>
-          )}
-          {posting && (
-            <div>
-              <img
-                src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"
-                alt="loading spinner"
-                style={{ width: "50px" }}
-              />
-            </div>
-          )}
+        <Button
+          className="lux"
+          color="dark"
+          style={{ width: "100%" }}
+          onClick={this.toggle}
+        >
+          Create A Post
+        </Button>
+        {postFailure && (
+          <div>
+            <img
+              src="https://thumbs.gfycat.com/BewitchedShamefulDobermanpinscher-max-1mb.gif"
+              alt="error animated gif"
+              style={{ width: "50px" }}
+            />
+          </div>
+        )}
+        {posting && (
+          <div>
+            <img
+              src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"
+              alt="loading spinner"
+              style={{ width: "50px" }}
+            />
+          </div>
+        )}
         <br />
-        <Modal isOpen={this.state.modal}>
-        <ModalHeader toggle={this.toggle}>New Post</ModalHeader>
+        <Modal isOpen={this.state.modal} className="lux">
+          <ModalHeader toggle={this.toggle}>New Post</ModalHeader>
 
-              <Form  onSubmit={this.handleSubmit}>
-                   <ModalBody>
-                <FormGroup>
-                  <Label for="title-field">Title</Label>
-                  <Input
-                    type="text"
-                    name="title"
-                    onChange={this.handleChange}
-                    value={this.state.title}
-                    id="title-field"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="body-field">Content</Label>
-                  <Input
-                    type="text"
-                    name="content"
-                    onChange={this.handleChange}
-                    required
-                    value={this.state.content}
-                    id="body-field"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="author-field">Author</Label>
-                  <Input
-                    type="text"
-                    name="author"
-                    onChange={this.handleChange}
-                    required
-                    value={this.state.author}
-                    id="author-field"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="image-field">Image URL</Label>
-                  <Input
-                    type="text"
-                    name="img_url"
-                    onChange={this.handleChange}
-                    required
-                    value={this.state.img_url}
-                    id="image-field"
-                  />
-                </FormGroup>
-                     </ModalBody>
-                            <ModalFooter>
+          <Form onSubmit={this.handleSubmit}>
+            <ModalBody>
+              <FormGroup>
+                <Label for="title-field">Title</Label>
+                <Input
+                  type="text"
+                  name="title"
+                  onChange={this.handleChange}
+                  value={this.state.title}
+                  id="title-field"
+                  className="lux-control"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="body-field">Content</Label>
+                <Input
+                  type="text"
+                  name="content"
+                  onChange={this.handleChange}
+                  required
+                  value={this.state.content}
+                  id="body-field"
+                  className="lux-control"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="author-field">Author</Label>
+                <Input
+                  type="text"
+                  name="author"
+                  onChange={this.handleChange}
+                  required
+                  value={this.state.author}
+                  id="author-field"
+                  className="lux-control"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="image-field">Image URL</Label>
+                <Input
+                  type="text"
+                  name="img_url"
+                  onChange={this.handleChange}
+                  required
+                  value={this.state.img_url}
+                  id="image-field"
+                  className="lux-control"
+                />
+              </FormGroup>
+            </ModalBody>
+            <ModalFooter>
               <div>
-                <button type="submit" className="btn btn-light lux">
+                <Button type="submit" className="lux" color="dark" outline>
                   Submit
-                </button>
+                </Button>
               </div>
-              <div
-                className="btn btn-light lux"
-                to="/profile"
+              <Button
+                className="lux"
+                color="dark"
+                outline
                 onClick={this.toggle}
               >
                 Cancel
-              </div>
+              </Button>
             </ModalFooter>
-              </Form>
+          </Form>
         </Modal>
       </>
     );

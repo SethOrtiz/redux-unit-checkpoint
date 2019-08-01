@@ -153,3 +153,12 @@ export function searchPosts(searchValue) {
     searchValue
   };
 }
+
+//////////////////   Sort by Votes  //////////////////////
+
+export const SORT_BY_VOTES = "SORT_BY_VOTES";
+export function sortByVotes() {
+    return {
+    type: SORT_BY_VOTES
+  };
+}

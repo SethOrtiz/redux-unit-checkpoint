@@ -133,3 +133,8 @@
     width: 30%; /* Set the width of the positioned div */
     opacity: 0.9;
   }
+
+  .toastStyle{
+    background-color: #343a40;
+    color: #fff
+  }

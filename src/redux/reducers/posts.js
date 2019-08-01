@@ -11,7 +11,8 @@ import {
   LOADING_DOWN_VOTE,
   DECREASE_VOTE,
   DECREASE_VOTE_ERROR,
-  SEARCH_VALUE
+  SEARCH_VALUE,
+  SORT_BY_VOTES
 } from "../actions";
 
 const initialState = {
@@ -116,7 +117,12 @@ function reducer(state = initialState, action) {
     case SEARCH_VALUE:
       return {
         ...state,
-        search : action.searchValue
+        search: action.searchValue
+      };
+    case SORT_BY_VOTES:
+      return {
+        ...state,
+        posts: state.posts.sort((a, b) => b.votes - a.votes)
       };
     default:
       return state;

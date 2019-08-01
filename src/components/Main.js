@@ -3,18 +3,29 @@ import FormContainer from "../redux/containers/FormContainer";
 import { Container, Row, Col } from "reactstrap";
 import CommentContainer from "../redux/containers/CommentContainer";
 import FilterContainer from "../redux/containers/FilterContainer";
+ import { ToastContainer} from 'react-toastify';
+ 
 class Main extends Component {
+
   componentDidMount = () => {
     this.props.getPosts();
   };
 
   render() {
     const { error, loading, posts, search } = this.props;
-    const searchedPosts = posts.filter( post =>
-        post.title.toLowerCase().includes(search.toLowerCase()) === true);
-
+    const searchedPosts = posts.filter(
+      post => post.title.toLowerCase().includes(search.toLowerCase()) === true
+    );
     return (
       <Container>
+      <ToastContainer toastClassName="toastStyle"  autoClose="2000"/>
+        <Row>
+          <Col lg="8">
+            <Container className="mt-5">
+              <h5>Popular Posts</h5>
+            </Container>
+          </Col>
+        </Row>
         <Row>
           <Col lg="8">
             <Container>
@@ -24,7 +35,7 @@ class Main extends Component {
                     <img
                       src="https://thumbs.gfycat.com/BewitchedShamefulDobermanpinscher-max-1mb.gif"
                       alt="error animated gif"
-                      style={{ width: "256px" }}
+                      style={{ width: "80%" }}
                     />
                   </div>
                 )}
@@ -33,7 +44,7 @@ class Main extends Component {
                     <img
                       src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"
                       alt="loading spinner"
-                      style={{ width: "256px" }}
+                      style={{ width: "80%" }}
                     />
                   </div>
                 )}
@@ -45,7 +56,6 @@ class Main extends Component {
                           key={post.id}
                           {...post}
                           postId={post.id}
-                          vostes={post.votes}
                         />
                       );
                     })}
@@ -55,7 +65,7 @@ class Main extends Component {
             </Container>
           </Col>
           <Col lg="4">
-            <Container className="mt-3 card-lux ">
+            <Container className=" mt-3 card-lux ">
               <FilterContainer />
               <FormContainer />
             </Container>

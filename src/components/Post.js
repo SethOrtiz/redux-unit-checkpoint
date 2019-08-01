@@ -29,6 +29,7 @@ class Post extends Component {
     this.props.getPostComments();
   };
 
+
   ////////////////   show comments   /////////////////
   toggle = () => {
     this.setState(prevState => {
@@ -70,6 +71,7 @@ class Post extends Component {
     } = this.props;
 
     const postComments = comments.filter(comment => comment.post_id === postId);
+  
     return (
       <Row className="mt-3">
         <Col style={{ display: "flex" }}>
