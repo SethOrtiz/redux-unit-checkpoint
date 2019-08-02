@@ -18,7 +18,7 @@ class Main extends Component {
     );
     return (
       <Container>
-      <ToastContainer toastClassName="toastStyle"  autoClose="2000"/>
+      <ToastContainer toastClassName="toastStyle"  autoClose={2000}/>
         <Row>
           <Col lg="8">
             <Container className="mt-5">
@@ -40,13 +40,13 @@ class Main extends Component {
                   </div>
                 )}
                 {loading && (
-                  <div>
+                  <Container>
                     <img
                       src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"
                       alt="loading spinner"
                       style={{ width: "80%" }}
                     />
-                  </div>
+                  </Container>
                 )}
                 {posts.length > 0 && (
                   <div>

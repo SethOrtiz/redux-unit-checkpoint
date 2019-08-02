@@ -11,7 +11,8 @@ import {
   Button,
   Form,
   Input,
-  Collapse
+  Collapse,
+  FormFeedback
 } from "reactstrap";
 
 import { FaArrowUp } from "react-icons/fa";
@@ -21,14 +22,16 @@ import { FaComment } from "react-icons/fa";
 class Post extends Component {
   state = {
     collapse: false,
-    newCommentValue: ""
+    newCommentValue: "",
+    formError: "",
+    valid: false,
+    inValid: false
   };
 
   //////////////    fetch comments    //////////////////
   componentDidMount = () => {
     this.props.getPostComments();
   };
-
 
   ////////////////   show comments   /////////////////
   toggle = () => {
@@ -39,15 +42,46 @@ class Post extends Component {
     });
   };
   ///////////////  post a comment    ////////////////
+  commentInput = React.createRef();
+
   handleChange = e => {
-    this.setState({
-      newCommentValue: e.target.value
-    });
+    e.preventDefault();
+
+    if (e.target.value.length === 0) {
+      this.setState({
+        newCommentValue: e.target.value,
+        valid: false,
+        inValid: false
+      });
+    } else {
+      this.setState({
+        newCommentValue: e.target.value,
+        valid: true,
+        inValid: false
+      });
+    }
   };
 
   handleSubmit = e => {
-    this.props.addComment(this.state.newCommentValue, this.props.postId);
     e.preventDefault();
+    if (!this.state.newCommentValue) {
+      let formError = { ...this.state.formError };
+      formError = !this.state.newCommentValue
+        ? "minimum 1 character required"
+        : "";
+      this.setState({
+        valid: false,
+        inValid: true,
+        formError
+      });
+    } else {
+      this.setState({
+        valid: false,
+        inValid: false,
+        newCommentValue: ""
+      });
+      this.props.addComment(this.state.newCommentValue, this.props.postId);
+    }
   };
 
   handleUpVote = () => {
@@ -56,12 +90,12 @@ class Post extends Component {
 
   handleDownVote = () => {
     if (this.props.votes > 0) {
-    this.props.getDownVote(this.props.postId);
+      this.props.getDownVote(this.props.postId);
     }
   };
 
   render() {
-    const { 
+    const {
       error,
       loading,
       postFailure,
@@ -71,7 +105,6 @@ class Post extends Component {
     } = this.props;
 
     const postComments = comments.filter(comment => comment.post_id === postId);
-  
     return (
       <Row className="mt-3">
         <Col style={{ display: "flex" }}>
@@ -113,7 +146,7 @@ class Post extends Component {
                 <Button
                   onClick={this.handleUpVote}
                   className="lux"
-                  style={{ width: "10%"}}
+                  style={{ width: "10%" }}
                   color="dark"
                   outline
                 >
@@ -131,22 +164,37 @@ class Post extends Component {
               </span>
               <Collapse isOpen={this.state.collapse} id="commentContainer">
                 <hr />
-                <Form style={{ marginTop: "1em" }} onSubmit={this.handleSubmit}>
+                <Form
+                  style={{ marginTop: "1em" }}
+                  onSubmit={this.handleSubmit}
+                  noValidate
+                >
                   <div style={{ width: "100%", display: "flex" }}>
-                    <span style={{ width: "80%" }}>
+                    <span style={{ width: "72.5%" }}>
                       <Input
                         type="text"
                         name="comment"
-                        id="comment-field"
+                        id="commentInput"
                         placeholder="Enter a comment here..."
                         value={this.state.newCommentValue}
                         onChange={this.handleChange}
-                        required
+                        ref={this.commentInput}
                         className="lux-control"
+                        valid={this.state.valid}
+                        invalid={this.state.inValid}
+                        required
                       />
+                      <FormFeedback style={{ marginLeft: "1em" }}>
+                        {this.state.formError}
+                      </FormFeedback>
                     </span>
-                    <span style={{ width: "20%" }}>
-                      <Button type="submit" className="lux" color="dark" outline>
+                    <span style={{ marginLeft: "7.5%", width: "20%" }}>
+                      <Button
+                        type="submit"
+                        className="lux"
+                        color="dark"
+                        outline
+                      >
                         Submit
                       </Button>
                     </span>
@@ -167,7 +215,7 @@ class Post extends Component {
                       <img
                         src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"
                         alt="loading spinner"
-                        style={{ width: "50px" }}
+                        style={{ width: "80%" }}
                       />
                     </div>
                   )}
