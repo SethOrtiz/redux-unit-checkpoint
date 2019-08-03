@@ -46,16 +46,13 @@ body {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: left;
-    padding: 0.5rem 13%;
+    padding: 0.1rem 5%;
     font-size: 0.765625rem;
     text-transform: uppercase;
     font-weight: 600;
     background-color: #fff;
     border-bottom: 0.5px solid #dddddd;
-    height: 3em;  
   }
-
-  /* remove height property if something is added to this subBar */
   
   .lux {
     font-family: inherit;
@@ -104,7 +101,7 @@ body {
   
   .lux-control:focus {
     color: #55595c;
-    background-color: #dbdbdb;
+    background-color: #eeeeee;
     border-color: #5a5a5a;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.1rem rgba(5, 5, 5, 0.4);
@@ -125,27 +122,17 @@ body {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    border: none;
     border-radius: 0;
     box-shadow: 0.2em 0.5em 1em 0.2em rgba(116, 116, 116, 0.125);
     
   }
   
-  .space {
-    background-image: url("https://bit.ly/314df6X");
-    background-color: #fff;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+  .card-lux:hover {
+    transform: scale(1.003);
+    transition: 0.3s;
   }
-  
+
   .card-size {
     width: 30em;
   }
@@ -171,3 +158,18 @@ body {
     background-color: #343a40;
     color: #fff
   }
+
+  .space-picture{
+    background-image: url("./images/Abstract.jpeg");
+    height: 3em;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .subtitle {
+     font-weight: 300;
+    font-size: 0.9em
+  }
+
+  

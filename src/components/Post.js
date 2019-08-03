@@ -117,7 +117,7 @@ class Post extends Component {
             </CardBody>
             <CardImg
               top
-              width="90%"
+              width="100%"
               src={this.props.img_url}
               alt="Card image"
             />
@@ -135,7 +135,7 @@ class Post extends Component {
                 style={{ width: "50%" }}
                 color="light"
               >
-                <FaComment /> {postComments.length} Comments
+                <FaComment /> {postComments.length} {postComments.length === 1 ? 'Comment' : 'Comments' }
               </Button>
               <span style={{ marginLeft: "10%" }}>
                 <span style={{ marginRight: "2%" }}>
@@ -256,4 +256,3 @@ class Post extends Component {
 }
 export default Post;
 
-// comment.postId === this.props.PostId

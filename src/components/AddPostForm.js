@@ -4,7 +4,6 @@ import {
   FormGroup,
   FormFeedback,
   FormText,
-  Label,
   Input,
   Button,
   Modal,
@@ -17,6 +16,7 @@ const urlRegex = RegExp(
   // eslint-disable-next-line no-useless-escape
   /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
 );
+
 
 class AddPostForm extends Component {
   state = {
@@ -136,6 +136,7 @@ class AddPostForm extends Component {
           color="dark"
           style={{ width: "100%" }}
           onClick={this.toggle}
+          outline
         >
           Create A Post
         </Button>
@@ -158,13 +159,12 @@ class AddPostForm extends Component {
           </div>
         )}
         <br />
-        <Modal isOpen={this.state.modal} className="lux">
-          <ModalHeader toggle={this.toggle}>New Post</ModalHeader>
+        <Modal isOpen={this.state.modal} style={{borerRadius: '0'}} className="lux">
+          <ModalHeader toggle={this.toggle}>Create a post</ModalHeader>
 
           <Form onSubmit={this.handleSubmit} noValidate>
             <ModalBody>
               <FormGroup>
-                <Label for="title-field">Title</Label>
                 <Input
                   type="text"
                   name="title"
@@ -175,61 +175,62 @@ class AddPostForm extends Component {
                   noValidate
                   valid={this.state.titleValid}
                   invalid={this.state.titleInvalid}
-                  required
+                  placeholder="Title"
+                  style={{border: '1px solid black', backgroundColor: '#fff'}}
                 />
                 <FormFeedback style={{ marginLeft: "1em" }}>
                   {this.state.formErrors.title}
                 </FormFeedback>
               </FormGroup>
               <FormGroup>
-                <Label for="body-field">Content</Label>
                 <Input
                   type="text"
                   name="content"
                   onChange={this.handleChange}
-                  required
+                  placeholder="Content"
                   value={this.state.content}
                   id="body-field"
                   className="lux-control"
                   noValidate
                   valid={this.state.contentValid}
                   invalid={this.state.contentInvalid}
+                  style={{border: '1px solid black', backgroundColor: '#fff'}}
                 />
                 <FormFeedback style={{ marginLeft: "1em" }}>
                   {this.state.formErrors.content}
                 </FormFeedback>
               </FormGroup>
               <FormGroup>
-                <Label for="author-field">Author</Label>
                 <Input
                   type="text"
                   name="author"
                   onChange={this.handleChange}
-                  required
+                  placeholder="Author"
                   value={this.state.author}
                   id="author-field"
                   className="lux-control"
                   noValidate
                   valid={this.state.authorValid}
                   invalid={this.state.authorInvalid}
+                  style={{border: '1px solid black', backgroundColor: '#fff'}}
                 />
                 <FormFeedback style={{ marginLeft: "1em" }}>
                   {this.state.formErrors.author}
                 </FormFeedback>
               </FormGroup>
               <FormGroup>
-                <Label for="image-field">Image URL</Label>
                 <Input
                   type="text"
                   name="img_url"
                   onChange={this.handleChange}
-                  required
+                  placeholder="Image Url"
                   value={this.state.img_url}
                   id="image-field"
                   className="lux-control"
                   noValidate
                   valid={this.state.img_urlValid}
                   invalid={this.state.img_urlInvalid}
+                  style={{border: '1px solid black', backgroundColor: '#fff'}}
                 />{" "}
                 <FormFeedback style={{ marginLeft: "1em" }}>
                   {this.state.formErrors.img_url}

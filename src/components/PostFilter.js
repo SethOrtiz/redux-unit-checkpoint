@@ -1,5 +1,6 @@
 import React  from "react";
-import { Form, Label, Input } from "reactstrap";
+import { Form, Label, Input, InputGroupAddon, InputGroupText, InputGroup} from "reactstrap";
+import {FaSearch} from "react-icons/fa"
 
 function PostFilter({ searchPosts, search }) {
   function changeHandler(e) {
@@ -7,8 +8,12 @@ function PostFilter({ searchPosts, search }) {
   }
     return (
       <Form>
+      <InputGroup style={{backgroundColor: '#fff', width: '101%'}}>
         <Label for="filter-field" />
+        <InputGroupAddon addonType="prepend">
+        <InputGroupText style={{backgroundColor: '#fff', border: 'none'}} ><FaSearch/></InputGroupText>
         <Input
+        style={{backgroundColor: '#fff', width: "20em"}} 
           className="lux-control"
           type="text"
           id="filter-field"
@@ -16,6 +21,8 @@ function PostFilter({ searchPosts, search }) {
           value={search} 
           onChange={changeHandler}
         />
+        </InputGroupAddon>
+        </InputGroup>
       </Form>
     );
   }
