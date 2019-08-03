@@ -41,8 +41,7 @@ class Post extends Component {
       };
     });
   };
-  ///////////////  post a comment    ////////////////
-  commentInput = React.createRef();
+  ///////////////  post a comment    ///////////////
 
   handleChange = e => {
     e.preventDefault();
@@ -178,7 +177,6 @@ class Post extends Component {
                         placeholder="Enter a comment here..."
                         value={this.state.newCommentValue}
                         onChange={this.handleChange}
-                        ref={this.commentInput}
                         className="lux-control"
                         valid={this.state.valid}
                         invalid={this.state.inValid}
@@ -215,7 +213,7 @@ class Post extends Component {
                       <img
                         src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif"
                         alt="loading spinner"
-                        style={{ width: "80%" }}
+                        style={{ width: "10px" }}
                       />
                     </div>
                   )}
