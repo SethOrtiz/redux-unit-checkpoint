@@ -240,8 +240,8 @@ class Post extends Component {
                   )}
                   {postComments.length > 0 && (
                     <div>
-                      {postComments.map(comment => {
-                        return <div key={comment.id}>{comment.content}</div>;
+                      {postComments.reverse().map(comment => {
+                        return <><div key={comment.id}>{comment.content}</div> <hr style={{backgroundColor: 'rgba(52, 58, 64, 0.2)'}}/></>;
                       })}
                     </div>
                   )}
