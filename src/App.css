@@ -128,11 +128,6 @@ body {
     
   }
   
-  .card-lux:hover {
-    transform: scale(1.003);
-    transition: 0.3s;
-  }
-
   .card-size {
     width: 30em;
   }
